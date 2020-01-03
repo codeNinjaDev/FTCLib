@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.robotcontroller.external.samples.FTCLibCommandSample;
 
+import com.arcrobotics.ftclib.camera.pixy.Pixy2;
+import com.arcrobotics.ftclib.camera.pixy.Pixy2CCC;
 import com.arcrobotics.ftclib.command.Subsystem;
 import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 import com.arcrobotics.ftclib.gamepad.ButtonReader;
@@ -24,7 +26,7 @@ public class DriveSubsystem implements Subsystem {
 
     final double WHEEL_DIAMETER = 4; // Inches
     final int PULSES_PER_ROTATION = 280; // NEVEREST 40
-
+    Pixy2 pixy2;
 
     ButtonReader slowDownButton;
 
@@ -39,7 +41,7 @@ public class DriveSubsystem implements Subsystem {
         frontRightMotor = new SimpleMotorImpl(hw, telemetry, "frontRightMotor", 383.6);
 
         gyro = new RevIMU(hw);
-
+        pixy2 = new Pixy2(hw, "pixy2");
 
         backLeftMotor.setInverted(true);
         frontLeftMotor.setInverted(true);
@@ -79,7 +81,11 @@ public class DriveSubsystem implements Subsystem {
     public void loop() {
         // Update the joystick values
         slowDownButton.readValue();
+        pixy2.getCCC().update(true, 1, 5);
 
+        Pixy2CCC.Block largestBlock = pixy2.getCCC().getLargestBlock();
+
+        Pixy2CCC.Block closestBlock = pixy2.getCCC().getClosestXBlock(316/2);
         double maxSpeed;
 
         if(slowDownButton.isDown())
