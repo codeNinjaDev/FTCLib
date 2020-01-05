@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.robotcontroller.external.samples.FTCLibCommandSample;
 
-import com.arcrobotics.ftclib.camera.pixy.Pixy2;
-import com.arcrobotics.ftclib.camera.pixy.Pixy2CCC;
 import com.arcrobotics.ftclib.command.Subsystem;
 import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 import com.arcrobotics.ftclib.gamepad.ButtonReader;
