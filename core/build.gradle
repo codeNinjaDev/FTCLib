@@ -1,12 +1,23 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'maven-publish'
 
-ext {
-    PUBLISH_GROUP_ID = 'com.arcrobotics'
-    PUBLISH_ARTIFACT_ID = 'ftclib'
-    PUBLISH_VERSION = '1.2.0'
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies{
+        classpath 'com.android.tools.build:gradle:3.5.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+    }
 }
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.codeNinjaDev'
 
 android {
     compileSdkVersion 28
@@ -69,4 +80,3 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 
-apply from: '../release-aar.gradle'
